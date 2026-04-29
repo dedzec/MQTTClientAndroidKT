@@ -55,7 +55,10 @@ class ConnectFragment : Fragment() {
         }
 
         view.findViewById<View>(R.id.button_connect).setOnClickListener {
-            val serverURIFromEditText = edittextServerUri.text.toString()
+            var serverURIFromEditText = edittextServerUri.text.toString().trim()
+            if (serverURIFromEditText.isNotEmpty() && !serverURIFromEditText.contains("://")) {
+                serverURIFromEditText = "tcp://$serverURIFromEditText"
+            }
             val clientIDFromEditText = edittextClientId.text.toString()
             val usernameFromEditText = edittextUsername.text.toString()
             val pwdFromEditText = edittextPassword.text.toString()
